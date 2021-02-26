@@ -5,26 +5,17 @@ arg2 = TypeVar("arg2")
 
 
 class MapColoringConstraint(Generic[arg1, arg2]):
-    def __init__(self, place1, place2):
+    def __init__(self, vertex1, vertex2):
         self.vertices = vertices
-        self.place1 = place1
-        self.place2 = place2
+        self.vertex1 = vertex1
+        self.vertex2 = vertex2
 
     def ifassigned(self, assigned):
-        if self.place1 not in assigned or self.place2 not in assigned:
+        if self.vertex1 not in assigned or self.vertex2 not in assigned:
             return True
-        if assigned[self.place1] != assigned[self.place2]:
+        if assigned[self.vertex1] != assigned[self.vertex2]:
             return True
         return False
-
-
-class Constraint(Generic[arg1, arg2]):
-    def __init__(self, vertices):
-        self.vertices = vertices
-
-    def ifassigned(self, assigned):
-        pass
-
 
 class CSP(Generic[arg1, arg2]):
     def __init__(self, vertices, colors):
@@ -85,6 +76,9 @@ for j in range(1, 6):
             vertices.append(int(data2[1]))
         inputdatalist.append(data2)
 
+    # d2 = Counter(vertices)
+    # vertices = sorted(d2.items(), key=lambda x: x[1], reverse=True)
+    # vertices = np.array(vertices)[:, 0]
     colors = []
     for i in range(0, int(color)):
         colors.append(i)
